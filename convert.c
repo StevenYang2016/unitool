@@ -2,6 +2,7 @@
 #include "stdio.h"
 #include "fcntl.h"
 #include "stdlib.h"
+#include "string.h"
 
 int convert_txt(char *srcfile,char *destfile){
 
@@ -41,6 +42,7 @@ int convert_txt(char *srcfile,char *destfile){
 		}
 
 	}
+	/****************
 	fd = open(dest.name, O_RDWR|O_CREAT|O_TRUNC);
     	if (fd < 0) {
         	printf("Error opening %s\n", dest.name);
@@ -54,6 +56,11 @@ int convert_txt(char *srcfile,char *destfile){
 		return 1;
 	}
 	close(fd);
+*********************************************/
+	if(writefile(&dest,buffer,4*size)!=0){
+		printf("writefile error \n");
+		return 1;
+	}
 	free(buffer);
 
 	return 0;
@@ -89,6 +96,7 @@ int convert_txttobin(char *srcfile,char *destfile){
 		}
 
 	}
+/*************
 	fd = open(dest.name, O_RDWR|O_CREAT|O_TRUNC);
     	if (fd < 0) {
         	printf("Error opening %s\n", dest.name);
@@ -102,6 +110,11 @@ int convert_txttobin(char *srcfile,char *destfile){
 		return 1;
 	}
 	close(fd);
+****************************/
+	if(writefile(&dest,buffer,num)!=0){
+		printf("writefile error \n");
+		return 1;
+	}
 	free(buffer);
 
 	return 0;
@@ -144,6 +157,7 @@ int convert_bintotxt(char *srcfile,char *destfile){
 		}
 
 	}
+/***************
 	fd = open(dest.name, O_RDWR|O_CREAT|O_TRUNC);
     	if (fd < 0) {
         	printf("Error opening %s\n", dest.name);
@@ -157,6 +171,12 @@ int convert_bintotxt(char *srcfile,char *destfile){
 		return 1;
 	}
 	close(fd);
+************************/
+	if(writefile(&dest,buffer,size*2)!=0){
+		printf("writefile error \n");
+		return 1;
+	}
+
 	free(buffer);
 
 	return 0;

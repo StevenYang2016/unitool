@@ -4,8 +4,9 @@ typedef struct{
 
 	char *name;
 	char *data;
-	int *size;
+	int size;
 } finfo;
 
 int readfile(finfo *mfinfo); 
+int writefile(finfo *mfinfo,char *buffer,int size); 
 int cleanfile(finfo *mfinfo);

@@ -1,6 +1,7 @@
 #include "common.h"
 #include "stdio.h"
 #include <fcntl.h>
+#include <stdlib.h>
 
 int readfile(finfo *mfinfo){
 	
@@ -35,6 +36,24 @@ int readfile(finfo *mfinfo){
 	close(fd);
 
 	return 0;
+}
+int writefile(finfo *mfinfo,char *buffer,int size){
+	
+	int fd,rc;
+	fd = open(mfinfo->name, O_RDWR|O_CREAT|O_TRUNC);
+    	if (fd < 0) {
+        	printf("Error opening %s\n", mfinfo->name);
+        	return 1;
+    	}
+
+	rc = write(fd, &buffer[0], size);
+	if (rc == 0) {
+		printf("Error writing to %s\n",mfinfo->name);
+		//free(buffer);
+		return 1;
+	}
+	close(fd);
+
 }
 
 int cleanfile(finfo *mfinfo){
