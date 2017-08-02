@@ -1,3 +1,7 @@
+
+#ifndef	COMMON_H
+#define	COMMON_H
+
 #define CONVERT_F 1
 #define CAT_F     2
 typedef struct{
@@ -10,3 +14,5 @@ typedef struct{
 int readfile(finfo *mfinfo); 
 int writefile(finfo *mfinfo,char *buffer,int size); 
 int cleanfile(finfo *mfinfo);
+
+#endif
