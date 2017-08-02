@@ -2,6 +2,7 @@
 #include "stdio.h"
 #include <fcntl.h>
 #include <stdlib.h>
+#include <string.h>
 
 int readfile(finfo *mfinfo){
 	
@@ -67,4 +68,57 @@ int cleanfile(finfo *mfinfo){
 		return 1;
 	else
 		return 0;
+}
+
+int merge(char *firstfile,char *secondfile,char *ofile){
+
+	finfo first;
+	finfo second;
+	finfo output;
+	int size=0,cur=0;	
+
+	first.name=firstfile;
+	second.name=secondfile;
+	output.name=ofile;
+	char *buffer;
+	readfile(&first);
+	readfile(&second);
+	size=first.size+second.size;
+	buffer=(char *)malloc(size);
+	if(buffer==NULL){
+		return 1;
+	}
+	memcpy(&buffer[cur],first.data,first.size);
+	cur+=first.size;
+	memcpy(&buffer[cur],second.data,second.size);
+	if(writefile(&output,buffer,size)!=0){
+		printf("writefile error \n");
+		return 1;
+	}	
+	return 0;
+}
+
+int padding(char *srcfile,int addr){
+        finfo src;
+        int cur=0;
+
+        src.name=srcfile;
+        char *buffer;
+        readfile(&src);
+	if(src.size>addr){
+		printf("Padding address error\n");
+		return 1;
+	}
+        buffer=(char *)malloc(addr);
+        if(buffer==NULL){
+                return 1;
+        }
+        memcpy(&buffer[cur],src.data,src.size);
+        cur+=src.size;
+        memset(&buffer[cur],0xff,addr-src.size);
+        if(writefile(&src,buffer,addr)!=0){
+                printf("writefile error \n");
+                return 1;
+        }
+        return 0;
 }

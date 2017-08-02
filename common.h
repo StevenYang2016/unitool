@@ -14,5 +14,7 @@ typedef struct{
 int readfile(finfo *mfinfo); 
 int writefile(finfo *mfinfo,char *buffer,int size); 
 int cleanfile(finfo *mfinfo);
+int merge(char *firstfile,char *secondfile,char *ofile);
+int padding(char *srcfile,int addr);
 
 #endif

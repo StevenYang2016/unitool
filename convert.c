@@ -37,26 +37,13 @@ int convert_txt(char *srcfile,char *destfile){
 			buffer[4 * i] = (((src.data[i] - 'A' + 10) >> 3) & 0x1) + '0';
 		}
 		else {
+			printf("The source file contains the character that out of the range to be processed.\n")
+			printf("Processing Range:'0'~'9','a'~'f','A'~'F'\n")
 			free(buffer);
 			return 1;
 		}
 
 	}
-	/****************
-	fd = open(dest.name, O_RDWR|O_CREAT|O_TRUNC);
-    	if (fd < 0) {
-        	printf("Error opening %s\n", dest.name);
-        	return 1;
-    	}
-
-	rc = write(fd, &buffer[0], 4*size);
-	if (rc == 0) {
-		printf("Error writing to %s\n", dest.name);
-		free(buffer);
-		return 1;
-	}
-	close(fd);
-*********************************************/
 	if(writefile(&dest,buffer,4*size)!=0){
 		printf("writefile error \n");
 		return 1;
@@ -91,26 +78,13 @@ int convert_txttobin(char *srcfile,char *destfile){
 			buffer[i/2] = (((src.data[i] - 'A')+10)<<offset)+buffer[i/2];
 		}
 		else {
+			printf("The source file contains the character that out of the range to be processed.\n")
+			printf("Processing Range:'0'~'9','a'~'f','A'~'F'\n")
 			free(buffer);
 			return 1;
 		}
 
 	}
-/*************
-	fd = open(dest.name, O_RDWR|O_CREAT|O_TRUNC);
-    	if (fd < 0) {
-        	printf("Error opening %s\n", dest.name);
-        	return 1;
-    	}
-
-	rc = write(fd, &buffer[0],num);
-	if (rc == 0) {
-		printf("Error writing to %s\n", dest.name);
-		free(buffer);
-		return 1;
-	}
-	close(fd);
-****************************/
 	if(writefile(&dest,buffer,num)!=0){
 		printf("writefile error \n");
 		return 1;
@@ -157,21 +131,6 @@ int convert_bintotxt(char *srcfile,char *destfile){
 		}
 
 	}
-/***************
-	fd = open(dest.name, O_RDWR|O_CREAT|O_TRUNC);
-    	if (fd < 0) {
-        	printf("Error opening %s\n", dest.name);
-        	return 1;
-    	}
-
-	rc = write(fd, &buffer[0],size*2);
-	if (rc == 0) {
-		printf("Error writing to %s\n", dest.name);
-		free(buffer);
-		return 1;
-	}
-	close(fd);
-************************/
 	if(writefile(&dest,buffer,size*2)!=0){
 		printf("writefile error \n");
 		return 1;
