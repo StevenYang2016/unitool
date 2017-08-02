@@ -122,3 +122,31 @@ int padding(char *srcfile,int addr){
         }
         return 0;
 }
+
+int htoi(char *s)
+{
+   int i = 0;
+   int n = 0;
+   int num = 0;
+   int ret=0;
+   char *str=s;
+   while(*str!='\0'){
+	n++;
+	str++;
+   }
+   for(i=0;i<n;i++)
+   {
+      
+      if((s[i]<='9')&&(s[i]>='0'))
+       num = s[i]-'0';
+      else if((s[i]<='f')&&(s[i]>='a'))
+       num=s[i]-'a'+10;
+      else if((s[i]<='F')&&(s[i]>='A'))
+       num=s[i]-'A'+10;
+      else
+        break;
+       ret=ret*16+num;
+    }
+    return ret;    
+}
+

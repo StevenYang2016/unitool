@@ -37,8 +37,8 @@ int convert_txt(char *srcfile,char *destfile){
 			buffer[4 * i] = (((src.data[i] - 'A' + 10) >> 3) & 0x1) + '0';
 		}
 		else {
-			printf("The source file contains the character that out of the range to be processed.\n")
-			printf("Processing Range:'0'~'9','a'~'f','A'~'F'\n")
+			printf("The source file contains the character that out of the range to be processed.\n");
+			printf("Processing Range:'0'~'9','a'~'f','A'~'F'\n");
 			free(buffer);
 			return 1;
 		}
@@ -78,8 +78,8 @@ int convert_txttobin(char *srcfile,char *destfile){
 			buffer[i/2] = (((src.data[i] - 'A')+10)<<offset)+buffer[i/2];
 		}
 		else {
-			printf("The source file contains the character that out of the range to be processed.\n")
-			printf("Processing Range:'0'~'9','a'~'f','A'~'F'\n")
+			printf("The source file contains the character that out of the range to be processed.\n");
+			printf("Processing Range:'0'~'9','a'~'f','A'~'F'\n");
 			free(buffer);
 			return 1;
 		}

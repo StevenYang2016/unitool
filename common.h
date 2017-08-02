@@ -16,5 +16,6 @@ int writefile(finfo *mfinfo,char *buffer,int size);
 int cleanfile(finfo *mfinfo);
 int merge(char *firstfile,char *secondfile,char *ofile);
 int padding(char *srcfile,int addr);
+int htoi(char *s);
 
 #endif

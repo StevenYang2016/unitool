@@ -16,7 +16,7 @@ void using(char *prog){
 	printf("	Using: %s -f 3 -i <input filename> -o <output filename>\n", prog);
 	printf("        type 4 : merge two files together\n");
 	printf("	Using: %s -f 4 -i <input filename1> -j <input filename2> -o <output filename>\n", prog);
-        printf("        type 5 : padding the file to the designated address\n");
+        printf("        type 5 : padding the file to the designated address,used for the file in binary format\n");
 	printf("	Using: %s -f 5 -i <input filename> -d <address>\n", prog);
 
 }
@@ -28,6 +28,7 @@ int main(int argc, char *argv[])
 	char *inputfile = NULL;
     	char *outputfile = NULL;
 	char *sec_inputfile=NULL;
+	char *strpad=NULL;
 	int padaddr,opt;
     	while (1) {
         	opt = getopt(argc, argv, "f:i:o:j:d:");
@@ -37,10 +38,11 @@ int main(int argc, char *argv[])
 
         	switch(opt) {
         		case 'd':
-            			padaddr= atoi(optarg);
+            			strpad = optarg;
+				padaddr =htoi(strpad);
             		break;
 			case 'f':
-            			fun   = atoi(optarg);
+            			fun = atoi(optarg);
             		break;
         		case 'i':
             			inputfile  = optarg;
